@@ -8,29 +8,32 @@ import java.util.Stack;
 
 
 
-public class InfixToPosfix {
 
+public class InfixToPosfix {
+	
+		
+		static final Scanner scn = new Scanner(System.in);
+		static final Stack<String> stackSignMath = new Stack<String>();
+		static final Stack<String> stackPosfix = new Stack<String>();
+		static final Hashtable<String,Integer> htbSignMath = new Hashtable<String,Integer>();
+
+		static final String Input = scn.nextLine();
+		
+		static final String Result="";
+		
+		static final String Character = "a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z";
+		static final String signMath ="$,(,+,-,*,/,^";
+		static final String numFlowMath="0,1,2,3,4,5,6";
+		
+		static final String[] partCharacter =Character.split(", ");
+		static final String[] partSignMath=signMath.split(",");
+		static final String[] partNumFlowMath=numFlowMath.split(",");
+		static final String[] partInput =Input.split("");
+
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//"$" < "(" < "+" = "-" < "*" = "/" < "^"
-		
-		Scanner scn = new Scanner(System.in);
-		Stack<String> stack = new Stack<String>();
-		Hashtable<String,Integer> htbSignMath = new Hashtable<String,Integer>();
-
-		String Input = scn.nextLine();
-		
-		String Result="";
-		
-		String Character = "a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z";
-		String signMath ="$,(,+,-,*,/,^";
-		String numFlowMath="0,1,2,3,4,5,6";
-		
-		String[] partCharacter =Character.split(", ");
-		String[] partSignMath=signMath.split(",");
-		String[] partNumFlowMath=numFlowMath.split(",");
-		String[] partInput =Input.split("");
 		
 		//Send item in hashtable 
 		for(int i=0;i<partSignMath.length;i++) {
@@ -61,13 +64,63 @@ public class InfixToPosfix {
 		
 		
 		
+		CompareSignMath("$",htbSignMath);
 		
 		
-		CompareSignMath("3",htbSignMath);
+	
+		for(String item:partInput) {
+			ReadInput(item,partSignMath,partCharacter);
+		}
 		
 		
-		System.out.println("Input_infix:");
-		String input = scn.nextLine();
+		while(!stackPosfix.isEmpty()) {
+			System.out.println(""+stackPosfix.pop());
+		}
+		
+		while(!stackSignMath.isEmpty()) {
+			System.out.println(""+stackSignMath.pop());
+		}
+
+		
+
+		
+	}
+	
+	
+	public static void ReadInput(String inputSelect,String[] partSignMath,String[] partCharacter) {
+		
+	
+		
+		for(String itemCharacter:partCharacter)
+		{
+		
+			if(inputSelect.equals(itemCharacter)) {
+				
+				stackPosfix.push(inputSelect);
+				
+			}
+			
+			
+		}
+		
+		
+		for(String itemSignMath:partSignMath) {
+			
+			if(inputSelect.equals(itemSignMath)) {
+				
+				stackSignMath.push(inputSelect);
+				
+			}
+			
+		}
+		
+		
+		
+
+		
+		
+		
+		
 		
 	}
 	
@@ -100,12 +153,19 @@ public class InfixToPosfix {
 					for(int i =0;i<7;i++) {
 						System.out.println(array[i].getValue()+""+array[i].getKey());
 					}
-		
+					
+					
+					
+					if(check==0)
+						System.out.println("this a last signMath");
 		 
 		
 					
 			}
 			finally {System.out.println("Lỗi không có trong SignMath");}
+			
+				
+			
 						
 		
 	}
