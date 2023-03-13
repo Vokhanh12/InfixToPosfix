@@ -17,22 +17,26 @@ public class InfixToPosfix {
 		static final Stack<String> stackPosfix = new Stack<String>();
 		static final Hashtable<String,Integer> htbSignMath = new Hashtable<String,Integer>();
 
-		static final String Input = scn.nextLine();
+		static String Input="$";
 		
 		static final String Result="";
 		
 		static final String Character = "a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z";
-		static final String signMath ="$,(,+,-,*,/,^";
-		static final String numFlowMath="0,1,2,3,4,5,6";
+		static final String signMath ="$,(,+,-,*,/,^,)";
+		static final String numFlowMath="0,1,2,3,4,5,6,7";
 		
 		static final String[] partCharacter =Character.split(", ");
 		static final String[] partSignMath=signMath.split(",");
 		static final String[] partNumFlowMath=numFlowMath.split(",");
-		static final String[] partInput =Input.split("");
 
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String Input="$";
+		System.out.print("Nhap vao:");
+		Input+=scn.nextLine();
+		final String[] partInput =Input.split("");
+
 		
 		
 		//Send item in hashtable 
@@ -70,19 +74,23 @@ public class InfixToPosfix {
 	
 		for(String item:partInput) {
 			ReadInput(item,partSignMath,partCharacter);
+
 		}
 		
+
 		
-		while(!stackPosfix.isEmpty()) {
+	/*	while(!stackPosfix.isEmpty()) {
 			System.out.println(""+stackPosfix.pop());
 		}
 		
 		while(!stackSignMath.isEmpty()) {
 			System.out.println(""+stackSignMath.pop());
 		}
-
+	*/
+		while(!stackSignMath.isEmpty()) {
+			System.out.println(""+stackSignMath.pop());
+		}
 		
-
 		
 	}
 	
@@ -91,7 +99,7 @@ public class InfixToPosfix {
 		
 	
 		
-		for(String itemCharacter:partCharacter)
+	/*	for(String itemCharacter:partCharacter)
 		{
 		
 			if(inputSelect.equals(itemCharacter)) {
@@ -100,17 +108,43 @@ public class InfixToPosfix {
 				
 			}
 			
-			
 		}
+		*/
 		
 		
 		for(String itemSignMath:partSignMath) {
 			
-			if(inputSelect.equals(itemSignMath)) {
+				if(!inputSelect.equals(itemSignMath)) 
+				{
+					
+					
+				}
+					
+				 else
+				 {
+					 if(!inputSelect.equals(")")) 
+						{
+					 		if(!inputSelect.equals("$"))
+					 		stackSignMath.push(inputSelect);
+
+						}
+						else 
+						{
+							
+							//putPostfix();
+							
+							while(!stackSignMath.isEmpty())
+							{
+								System.out.println("Pop:"+stackSignMath.pop());
+							}
+							
+							stackSignMath.push("$");
+							
+							
+						}
+
 				
-				stackSignMath.push(inputSelect);
-				
-			}
+				 }
 			
 		}
 		
@@ -150,7 +184,7 @@ public class InfixToPosfix {
 						
 					System.out.println("Check="+check);
 					
-					for(int i =0;i<7;i++) {
+					for(int i=0;i<7;i++) {
 						System.out.println(array[i].getValue()+""+array[i].getKey());
 					}
 					
