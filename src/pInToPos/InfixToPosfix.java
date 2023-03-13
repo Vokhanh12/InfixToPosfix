@@ -3,6 +3,7 @@ package pInToPos;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -28,6 +29,8 @@ public class InfixToPosfix {
 		static final String[] partCharacter =Character.split(", ");
 		static final String[] partSignMath=signMath.split(",");
 		static final String[] partNumFlowMath=numFlowMath.split(",");
+		
+		static String arrHandlerBracketIn="";
 
 	
 	public static void main(String[] args) {
@@ -120,9 +123,17 @@ public class InfixToPosfix {
 					
 				}
 					
-				 else
-				 {
-					 if(!inputSelect.equals(")")) 
+				else 
+				{
+					handlerBracket(inputSelect,"(",")");
+				}
+					
+					
+					
+					
+					/*
+					  if(!inputSelect.equals(")")) 
+					 
 						{
 					 		if(!inputSelect.equals("$"))
 					 		stackSignMath.push(inputSelect);
@@ -142,9 +153,10 @@ public class InfixToPosfix {
 							
 							
 						}
+						*/
 
 				
-				 }
+				 
 			
 		}
 		
@@ -184,7 +196,7 @@ public class InfixToPosfix {
 						
 					System.out.println("Check="+check);
 					
-					for(int i=0;i<7;i++) {
+					for(int i=0;i<array.length;i++) {
 						System.out.println(array[i].getValue()+""+array[i].getKey());
 					}
 					
@@ -198,9 +210,48 @@ public class InfixToPosfix {
 			}
 			finally {System.out.println("Lỗi không có trong SignMath");}
 			
-				
-			
-						
 		
 	}
+	
+	public static void putPosfix(Stack<String> stackPostfix) {
+		
+		
+		
+		
+	}
+	
+	
+	public static void handlerBracket(String inputSelect,String strStart,String strEnd) {
+		
+		Boolean bracket=true;
+		
+		if(inputSelect.equals(strStart)) {
+			bracket=true;
+			System.out.println("Hello world"+arrHandlerBracketIn);
+		}
+		
+		if(inputSelect.equals(strEnd)) {
+			
+			bracket=false;
+			System.out.println("Hello world1"+arrHandlerBracketIn);
+		}
+		
+		if(bracket || inputSelect.equals(strEnd))
+		{
+			arrHandlerBracketIn+=inputSelect;
+			System.out.println("Hello world3"+arrHandlerBracketIn);
+		}
+		
+		if(!bracket) 
+		{
+			System.out.println(""+arrHandlerBracketIn);
+
+		}
+		
+		System.out.println(""+arrHandlerBracketIn);
+
+		
+	}
+	
+	
 }
